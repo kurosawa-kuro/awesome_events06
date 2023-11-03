@@ -8,6 +8,8 @@ class EventsController < ApplicationController
 
         if @event.save
             redirect_to @event, notice: "作成しました"
+        else
+            render :new  # この部分が重要です。
         end
     end
 
