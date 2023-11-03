@@ -1,3 +1,10 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  resources :events
+  root 'welcome#index'
+  resources :events do
+    resources :tickets
+  end 
+  resource :retirements, only: %i[new create]
+  get "/auth/:provider/callback", to: "sessions#create"
+  delete "/logout", to: "sessions#destroy"
 end
