@@ -12,6 +12,12 @@ module AuthHelper
         }
       })
       get "/auth/github/callback"
+
+      @current_user = user
+    end
+
+    def current_user
+        @current_user
     end
 end
   

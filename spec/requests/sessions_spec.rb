@@ -5,7 +5,10 @@ RSpec.describe SessionsController, type: :request do
 
   describe 'Sessions' do
     context 'when logging in via GET /auth/:provider/callback' do
-      before { sign_in_as(user) }
+      before { 
+        sign_in_as(user)
+        # puts current_user().inspect
+      }
 
       it 'logs in a user' do
         follow_redirect!
@@ -15,7 +18,9 @@ RSpec.describe SessionsController, type: :request do
     end
 
     context 'when logging out via DELETE /logout' do
-      before { sign_in_as(user) }
+      before { 
+        sign_in_as(user)
+      }
 
       it 'logs out the user' do
         expect(request.session[:user_id]).to eq(user.id)
