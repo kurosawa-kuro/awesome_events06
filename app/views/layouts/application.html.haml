@@ -29,4 +29,8 @@
       - if flash.alert
         .alert.alert-danger
           = flash.alert
+      - if flash[:error]
+        .alert.alert-danger
+          - flash[:error].each do |error|
+            %p= error
       = yield
