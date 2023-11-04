@@ -8,8 +8,10 @@ class EventsController < ApplicationController
 
         if @event.save
             redirect_to @event, notice: "作成しました"
-        else
-            render :new  # この部分が重要です。
+          else
+            Rails.logger.debug(@event.errors.full_messages)  # ログ出力するコードを追加
+            flash.now[:error] = @event.errors.full_messages  # ユーザーにもエラーメッセージを表示する
+            render :new  # エラーメッセージと共に新規作成ページを再表示
         end
     end
 
@@ -41,6 +43,6 @@ class EventsController < ApplicationController
     def event_params
         params.require(:event).permit(
             :name, :place, :image, :remove_image, :content, :start_at, :end_at
-        )
+          )
     end
 end
